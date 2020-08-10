@@ -42,7 +42,7 @@ public class DataAnalyzer {
                 }
                 reader.close();
             }
-
+            FileWriter.writeToFile(results);
         }catch (IOException e) {
             throw new RuntimeException(e);
         }

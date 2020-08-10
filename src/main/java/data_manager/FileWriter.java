@@ -9,14 +9,14 @@ public class FileWriter {
     public static void writeToFile(List<String> results) throws IOException {
 
         FileOutputStream fileOutputStream = new FileOutputStream(resultFile);
-        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream));
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fileOutputStream));
 
         for (String result : results) {
-            bufferedWriter.write(result);
-            bufferedWriter.newLine();
+            writer.write(result);
+            writer.newLine();
         }
 
-        bufferedWriter.close();
+        writer.close();
         System.out.println("Modified table and column names were written out to ./results.txt.");
     }
 }
