@@ -28,6 +28,16 @@ public class DataAnalyzer {
                     //Checks if query starts with ALTER
                     if (line[0].toUpperCase().equals("ALTER")) {
                         String tableName = setTableName(line);
+                        if (!tableName.matches(".*dw[0-9][0-9].*")) {
+                            String columnName = setColumnName(line, tableName);
+                            //If setColumnName() method returns "", that means only table was modified,
+                            // no columns were affected. For example: ALTER TABLE table_name ORDER BY value;
+                            if(!columnName.equals(""))
+                                results.add(tableName + "." + columnName);
+                            //This method writes the results into txt file in tableName.columnName format.
+
+                        }
+
                     }
                 }
                 reader.close();
@@ -59,5 +69,21 @@ public class DataAnalyzer {
         }
         return query[tableNameIndex];
 
+    }
+    public String setColumnName(String[] query, String tableName) {
+
+        //The first ALTER statement is not included in the iteration
+        for (int i = 2; i < query.length; i++) {
+            // columnName found = If the word before the current word (index i-1) IS a SQL keyword,
+            // and the current word is NOT a keyword, also NOT the table's name
+
+            if (keywordsBeforeColumnName.contains(query[i - 1]) &&
+                    !keywordsBeforeColumnName.contains(query[i])) {
+                if (!query[i].equals(tableName)) {
+                    return query[i];
+                }
+            }
+        }
+        return "";
     }
 }
