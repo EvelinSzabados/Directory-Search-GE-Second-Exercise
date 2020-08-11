@@ -1,6 +1,6 @@
-vehicles.color;
+vehicles.color
 employee.department
 members2.fullname
 clientsdw1a.status
 cities.state
-clientswd33.client_type;
+clientswd33.client_type

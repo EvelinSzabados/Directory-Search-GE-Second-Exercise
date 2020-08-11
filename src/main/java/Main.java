@@ -2,6 +2,8 @@ import data_manager.DataAnalyzer;
 import data_manager.SearchFiles;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -10,5 +12,7 @@ public class Main {
 
         DataAnalyzer dataAnalyzer = new DataAnalyzer(searchFiles.getFiles());
         dataAnalyzer.readFile();
+
+
     }
 }
