@@ -3,7 +3,6 @@ package data_manager;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -19,14 +18,15 @@ public class DataAnalyzer {
 
     public void readFile() {
         try {
-            for (File f : files) {
+            for (File currentFile : files) {
 
-                File fileToRead = new File(f.toString());
+                File fileToRead = new File(currentFile.toString());
                 Scanner reader = new Scanner(fileToRead);
                 while (reader.hasNextLine()) {
                     String line = reader.nextLine();
                     if (line.split(" ")[0].toUpperCase().equals("ALTER")) {
                         String tableName = setTableName(line);
+                        assert tableName != null;
                         if (!tableName.matches(".*dw[0-9][0-9].*")) {
                             String columnName = setColumnName(line, tableName);
 
@@ -60,7 +60,6 @@ public class DataAnalyzer {
         Matcher matcher = Pattern.compile(tableName +"\\s.*(ADD|DROP|CHANGE|MODIFY|RENAME|ALTER|IF EXISTS|IF NOT EXISTS|COLUMN)\\s\\w+").matcher(query);
         if (matcher.find()) {
             String[] matches = matcher.group().split(" ");
-            System.out.println(matches[matches.length - 1]);
             return matches[matches.length - 1];
         }
         return "";

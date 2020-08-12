@@ -14,28 +14,26 @@ public class SearchFiles {
 
         assert fileList != null;
         for (File file : fileList) {
-            //If current directory has subdirectory,those files will be saved as well recursively
             if (file.isDirectory()) {
                 getFilesInDir(file.toString());
             } else {
                 files.add(file);
             }
         }
-
     }
+
     public FileFilter sqlFilter() {
 
         return new FileFilter() {
             @Override
             public boolean accept(File pathname) {
-                //Filters out .sql files and subdirectories
                 return pathname.getName().toLowerCase().endsWith(".sql")
                         || pathname.isDirectory();
             }
         };
     }
 
-    public List<File> getFiles(){
+    public List<File> getFiles() {
         return this.files;
     }
 }
