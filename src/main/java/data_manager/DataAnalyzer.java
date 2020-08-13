@@ -22,6 +22,7 @@ public class DataAnalyzer {
 
                 File fileToRead = new File(currentFile.toString());
                 Scanner reader = new Scanner(fileToRead);
+
                 while (reader.hasNextLine()) {
                     String line = reader.nextLine();
                     if (line.split(" ")[0].toUpperCase().equals("ALTER")) {
@@ -47,7 +48,6 @@ public class DataAnalyzer {
 
         Matcher matcher = Pattern.compile("TABLE\\s*(IF EXISTS)?\\s*\\w+").matcher(query);
         if (matcher.find()) {
-
             String[] matches = matcher.group().split(" ");
             return matches[matches.length - 1];
         }
